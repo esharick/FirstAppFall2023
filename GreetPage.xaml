@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstApp.GreetPage"
+             Title="GreetPage">
+    <VerticalStackLayout>
+        <Label
+            Text="{Binding Source={x:Reference slider}, Path=Value, StringFormat='Font size is {0:F0}'}"
+            FontSize="{Binding Source={x:Reference slider}, Path=Value}"
+            HorizontalOptions="Center"/>
+        <Button 
+                x:Name="button"
+                Text="This is a button!"
+                TextColor="BurlyWood"
+                BackgroundColor="Blue"
+                BorderColor="Aqua"
+                BorderWidth="5"
+                HorizontalOptions="Center"
+                BindingContext="{x:Reference slider}"
+                FontSize="{Binding Value}"
+                CornerRadius="{Binding Value}"
+                Clicked="ButtonClicked"/>
+        <Slider 
+                x:Name="slider"
+                Maximum="64"
+                Minimum="8"
+                
+                />
+
+        <Button Text="Go back"
+                Clicked="BackButtonClicked"
+                HorizontalOptions="Center"/>
+        
+
+        <Entry Placeholder="Enter name" />
+        <Editor/>
+
+        <Label Text="What's your favorite animal?" />
+        <RadioButton Content="Cat" />
+        <RadioButton Content="Dog" />
+        <RadioButton Content="Elephant" />
+        <RadioButton Content="Monkey"
+                 IsChecked="true" />
+
+        <Stepper/>
+        
+        
+
+
+    </VerticalStackLayout>
+</ContentPage>
