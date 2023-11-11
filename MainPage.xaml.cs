@@ -29,11 +29,14 @@ public partial class MainPage : ContentPage
 			//page.NavigateAway += (obj, val) =>
 			//{
 			//	count = val;
-	  //          CounterBtn.Text = $"Clicked {count} times";
-	  //      };
+			//          CounterBtn.Text = $"Clicked {count} times";
+			//      };
 			Navigation.PushAsync(page);
 		}
-		else {
+		else if (button.Text.Contains("Collection")) {
+			Navigation.PushAsync(new ContactListPage());
+		}
+		else{
 			Navigation.PushAsync(new TabbedPageExample());
 		}
 

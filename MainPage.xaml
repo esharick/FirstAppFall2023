@@ -47,6 +47,11 @@
                 HorizontalOptions="Center" 
                 />
 
+            <Button Text="Go to Collections Page"
+                Clicked="OnGoToClicked"
+                HorizontalOptions="Center" 
+                />
+
             </HorizontalStackLayout>
 
         </VerticalStackLayout>
