@@ -7,16 +7,25 @@ namespace FirstApp;
 public partial class ContactListPage : ContentPage
 {
 	private ObservableCollection<Models.Contact> contacts, searchSubset;
-
+	private ContactDatabase contactDB;
 	public ContactListPage()
 	{
 		InitializeComponent();
-		InitializeContactList();
 		searchSubset = new ObservableCollection<Models.Contact>();
+		contacts = new ObservableCollection<Models.Contact> { };
 		contactListView.ItemsSource = contacts;
+		contactDB = new ContactDatabase();
+		LoadContactsFromDataBase();
+	}
+	private async void LoadContactsFromDataBase() {
+		contacts.Clear();
+		foreach (var contact in await contactDB.GetContactsAsync()) 
+		{ 
+			contacts.Add(contact);
+		}
 	}
 
-	private void InitializeContactList() {
+	private async void ResetContactList() {
 		//could be replaced with a connection to a database or some other data file
 		contacts = new ObservableCollection<Models.Contact>()
 		{
@@ -26,6 +35,12 @@ public partial class ContactListPage : ContentPage
             new Models.Contact() { Name="Dan", Status="Do not disturb", ImageUrl="dotnet_bot.png"},
 			new Models.Contact() { Name="Eric", Status="Online", ImageUrl="dotnet_bot.png"},
         };
+		contactListView.ItemsSource = contacts;
+
+        contactDB.ClearDatabase();
+		foreach (var c in contacts) {
+			await contactDB.SaveContactAsync(c);
+		}
 	}
 
     private void contactListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
@@ -35,6 +50,7 @@ public partial class ContactListPage : ContentPage
     private void contactListView_ItemTapped(object sender, ItemTappedEventArgs e) {
 		var contact = e.Item as Models.Contact;
 		contact.Name = "Jeff";
+		contactDB.SaveContactAsync(contact);
     }
 
     private void SearchBar_TextChanged(object sender, TextChangedEventArgs e) {
@@ -51,6 +67,17 @@ public partial class ContactListPage : ContentPage
 			}
 		}
 		contactListView.ItemsSource = searchSubset;
+    }
+
+    private void ToolbarItem_Clicked(object sender, EventArgs e) {
+		ResetContactList();
+    }
+
+    private void DeleteButtonClicked(object sender, EventArgs e) {
+		var button = sender as Button;
+		var contact = button.CommandParameter as Models.Contact;
+		contacts.Remove(contact);
+		contactDB.DeleteContactAsync(contact);
     }
 
     private void SearchBar_SearchButtonPressed(object sender, EventArgs e) {

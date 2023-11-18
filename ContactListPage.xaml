@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FirstApp.ContactListPage"
              Title="ContactListPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text ="Reset to initial list" Order="Secondary" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ScrollView>        
         <VerticalStackLayout Padding="20">
             <SearchBar Placeholder="Search..." TextChanged="SearchBar_TextChanged"
@@ -26,7 +29,9 @@
                                     <Label Text="{Binding Name}" FontSize="24" FontAttributes="Bold"/>
                                     <Label Text="{Binding Status}" FontSize="14" />
                                 </VerticalStackLayout>
-                                <Button Text="Message" VerticalOptions="Center"/>
+                                <Button Text="Delete Contact" VerticalOptions="Center" 
+                                        CommandParameter="{Binding .}"
+                                        Clicked="DeleteButtonClicked"/>
                             </HorizontalStackLayout>
                         </ViewCell>
                     </DataTemplate>

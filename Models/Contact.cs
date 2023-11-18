@@ -4,9 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace FirstApp.Models {
     public class Contact : INotifyPropertyChanged {
+
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+
         private string name;
         public string Name {
             get { return name; }

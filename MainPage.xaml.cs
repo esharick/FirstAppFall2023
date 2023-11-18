@@ -2,16 +2,19 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 8;
+	private int count;
 
 	public MainPage()
 	{
 		InitializeComponent();
+		count = Preferences.Default.Get("count", 8);
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
 		count+=1;
+		Preferences.Default.Set("count", count);
+
 		if (count == 1)
 			CounterBtn.Text = $"Clicked {count} time";
 		else
@@ -45,6 +48,7 @@ public partial class MainPage : ContentPage
 
 	private void OnNavigatedAway(object sender, int sliderValue) {
 		count = sliderValue;
+        Preferences.Default.Set("count", count);
         CounterBtn.Text = $"Clicked {count} times";
 	}
 }
