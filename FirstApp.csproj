@@ -58,6 +58,9 @@
 	  <MauiXaml Update="ColorPickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ContactDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="ContactListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

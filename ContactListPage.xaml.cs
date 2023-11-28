@@ -49,8 +49,15 @@ public partial class ContactListPage : ContentPage
 
     private void contactListView_ItemTapped(object sender, ItemTappedEventArgs e) {
 		var contact = e.Item as Models.Contact;
-		contact.Name = "Jeff";
-		contactDB.SaveContactAsync(contact);
+        var detailPage = new ContactDetailPage(contact);
+        detailPage.ContactSaved += (source, contactCopy) =>
+        {
+			contact.Name = contactCopy.Name;
+			contact.Status = contactCopy.Status;
+			contact.ImageUrl = contactCopy.ImageUrl;            
+            contactDB.SaveContactAsync(contact);
+        };
+        Navigation.PushAsync(detailPage);
     }
 
     private void SearchBar_TextChanged(object sender, TextChangedEventArgs e) {
@@ -79,6 +86,19 @@ public partial class ContactListPage : ContentPage
 		contacts.Remove(contact);
 		contactDB.DeleteContactAsync(contact);
     }
+
+    private void AddButtonClicked(object sender, EventArgs e) {
+		var contact = new Models.Contact();
+		var detailPage = new ContactDetailPage(contact);
+        detailPage.ContactSaved += (source, contactCopy) =>
+		{
+			contacts.Add(contactCopy);
+			contactDB.SaveContactAsync(contactCopy);
+		};
+        Navigation.PushAsync(detailPage);
+    }
+
+
 
     private void SearchBar_SearchButtonPressed(object sender, EventArgs e) {
 

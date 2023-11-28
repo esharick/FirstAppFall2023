@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FirstApp.ContactDetailPage"
+             Title="ContactDetailPage">
+    <VerticalStackLayout>
+        <TableView>
+            <TableRoot>
+                <TableSection Title="Contact Information">
+                    <EntryCell Label="Name:" Text="{Binding Name}" Placeholder="enter contact name"/>
+                    <EntryCell Label="Status:" Text="{Binding Status}" Placeholder="enter status"/>
+                    <EntryCell Label="Image Url:" Text="{Binding ImageUrl}" Placeholder="enter image url"/>
+
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <Button Text="Save Contact" Clicked="SaveButtonClicked"/>
+    </VerticalStackLayout>
+</ContentPage>

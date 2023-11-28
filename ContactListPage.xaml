@@ -37,6 +37,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Button Text="Add new contact" Clicked="AddButtonClicked"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
